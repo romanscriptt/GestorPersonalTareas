@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">GestorPersonalTareas</string>
+    <!-- Guardamos aquí todos los textos de la app para tenerlos ordenados en un solo sitio -->
+    <string name="app_name">Gestor Personal de Tareas</string>
+    <string name="titulo_principal">Mis Tareas</string>
+    <string name="nueva_tarea">Nueva tarea</string>
+    <string name="editar_tarea">Editar tarea</string>
+    <string name="tareas_ejemplo">Tareas de ejemplo</string>
+    <string name="solo_pendientes">Mostrar solo pendientes</string>
+    <string name="sin_tareas">Todavía no hay tareas registradas. Pulsa «Nueva tarea» para añadir una.</string>
 </resources>

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Le pedimos permiso al móvil para usar Internet y poder descargar las tareas de ejemplo -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Aquí van los ajustes generales de la app como por ejemplo su icono, su nombre y los colores -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,15 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestorPersonalTareas">
+
+        <!-- Esta es la pantalla única donde va a funcionar toda nuestra aplicación -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.GestorPersonalTareas"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/Theme.GestorPersonalTareas">
+
+            <!-- Cuando alguien toque el icono de la app, abre esta pantalla -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
