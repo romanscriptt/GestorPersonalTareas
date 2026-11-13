@@ -1,4 +1,5 @@
 [versions]
+# --- TUS VERSIONES ORIGINALES ---
 agp = "9.4.1"
 coreKtx = "1.19.1"
 junit = "4.13.2"
@@ -9,7 +10,18 @@ activityCompose = "1.13.0"
 kotlin = "2.2.10"
 composeBom = "2026.02.01"
 
+# --- VERSIONES NUEVAS QUE AÑADIMOS ---
+# Versión del ayudante automático de la base de datos (coincide con tu Kotlin 2.2.10)
+ksp = "2.2.10-2.0.2"
+# Versión de la base de datos donde se guardan las tareas en el móvil
+room = "2.8.4"
+# Versión de la memoria rápida que recuerda si activaste el filtro de pendientes
+datastore = "1.1.7"
+# Versión de la herramienta para descargar las tareas de ejemplo desde Internet
+retrofit = "3.0.0"
+
 [libraries]
+# --- TUS HERRAMIENTAS ORIGINALES ---
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -25,7 +37,29 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+# Permite que la pantalla se actualice sola al instante cuando cambian las tareas
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
+
+# El motor principal de la base de datos que guarda tus tareas en el teléfono
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+# Hace que guardar y leer tareas funcione fluido sin que la pantalla se quede congelada
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+# El ayudante que fabrica automáticamente el código interno de la base de datos
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# Guarda pequeños ajustes de la app, como el interruptor de "Mostrar solo pendientes"
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# Se conecta a Internet para pedir las tareas de ejemplo
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+# Traduce los datos que vienen de Internet para que nuestra app los entienda como tareas
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# Añade iconos listos para usar en los botones (papelera para borrar, lápiz para editar, etc.)
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+# Registra el complemento del ayudante automático de la base de datos
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
