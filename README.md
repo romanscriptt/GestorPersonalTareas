@@ -77,4 +77,19 @@ es.centro.gestortareas/
 │   └── AppDataBase.kt      # Construye y abre la base de datos "tareas_db"              
 └── MainActivity.kt        
 ```
+---
+ 
+## 5. Documentación técnica
+ 
+### 5.1 Configuración del proyecto
+ 
+Las versiones se centralizan en el catálogo `gradle/libs.versions.toml`:
 
+```toml
+[versions]
+kotlin    = "2.2.10"
+ksp       = "2.2.10-2.0.2"   # debe ser compatible con la versión de Kotlin
+room      = "2.8.4"
+datastore = "1.1.7"
+retrofit  = "3.0.0"
+```
