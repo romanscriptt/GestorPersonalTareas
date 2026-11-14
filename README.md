@@ -113,3 +113,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
 }
 ```
+**Permisos** (`AndroidManifest.xml`): únicamente `INTERNET`, necesario para consultar el servicio web. Es un permiso normal que no requiere diálogo al usuario. No se solicitan permisos innecesarios (SMS, Bluetooth, contactos o ubicación).
+ 
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+ 
+---
