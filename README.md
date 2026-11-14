@@ -93,3 +93,23 @@ room      = "2.8.4"
 datastore = "1.1.7"
 retrofit  = "3.0.0"
 ```
+y se usan en `app/build.gradle.kts`:
+
+```kotlin
+dependencies {
+    // Base de datos local (Room)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)          // genera el código de Room al compilar
+ 
+    // Preferencias del usuario
+    implementation(libs.androidx.datastore.preferences)
+ 
+    // Comunicaciones
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+ 
+    // Observación de datos desde la interfaz
+    implementation(libs.androidx.lifecycle.runtime.compose)
+}
+```
