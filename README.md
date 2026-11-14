@@ -1,10 +1,38 @@
 # Gestor Personal de Tareas
 
-Aplicación móvil para Android desarrollada con **Kotlin** y **Jetpack Compose** que permite organizar tareas diarias, asignar prioridades, filtrar pendientes y guardar toda la información directamente en la memoria del teléfono.
+Aplicación móvil para **Android** desarrollada con **Kotlin** y **Jetpack Compose** que permite organizar tareas diarias, asignarles una prioridad, marcarlas como completadas, filtrar las pendientes y conservar toda la información en la memoria del teléfono, incluso después de cerrar la aplicación.
+
+Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos Móviles (PMDM)**.
+
+---
+ 
+## Índice
+ 
+1. [Descripción](#1-descripción)
+2. [Estado del proyecto](#2-estado-del-proyecto)
+3. [Tecnologías y bibliotecas](#3-tecnologías-y-bibliotecas)
+4. [Arquitectura y estructura de carpetas](#4-arquitectura-y-estructura-de-carpetas)
+5. [Documentación técnica](#5-documentación-técnica)
+   - [5.1 Configuración del proyecto](#51-configuración-del-proyecto)
+   - [5.2 Modelo de datos: `Tarea`](#52-modelo-de-datos-tarea)
+   - [5.3 Acceso a datos: `TareaDao`](#53-acceso-a-datos-tareadao)
 
 ---
 
-## Estado actual del proyecto (hasta la base de datos)
+## 1. Descripción
+ 
+El **Gestor Personal de Tareas** está pensado para registrar tareas personales, académicas o profesionales. Funcionalidades previstas:
+ 
+- Crear, consultar, editar y eliminar tareas.
+- Asignar una **prioridad** (baja, media o alta) y marcar cada tarea como **completada**.
+- Mostrar **solo las pendientes** mediante un interruptor cuya elección se recuerda entre ejecuciones.
+- Guardar las tareas de forma **permanente** en una base de datos local.
+- Consultar tareas de ejemplo de un servicio web (JSONPlaceholder).
+- Compartir una tarea con otras aplicaciones instaladas en el dispositivo.
+
+---
+
+## 2. Estado del proyecto
 
 El proyecto ya tiene lista toda la configuración inicial, los recursos visuales y el motor completo para guardar y leer tareas en el móvil:
 
@@ -19,24 +47,24 @@ El proyecto ya tiene lista toda la configuración inicial, los recursos visuales
 
 ---
 
-## Herramientas utilizadas
-
-* **Lenguaje:** Kotlin (`2.2.10`)
-* **Diseño de pantallas:** Jetpack Compose + Material Design 3
-* **Base de datos en el móvil:** Room (`2.8.4`) con generador automático KSP
-* **Ajustes rápidos (preparado):** DataStore Preferences (`1.1.7`)
-* **Descarga de datos (preparado):** Retrofit (`3.0.0`) + Gson
+## 3. Tecnologías y bibliotecas
+ 
+| Tecnología | Versión | Para qué se usa |
+|---|---|---|
+| **Kotlin** | 2.2.10 | Lenguaje de programación |
+| **Jetpack Compose** + **Material 3** | BOM `2026.02.01` | Construcción de la interfaz |
+| **Room** (`runtime`, `ktx`, `compiler`) | 2.8.4 | Base de datos local (SQLite) |
+| **KSP** | 2.2.10-2.0.2 | Genera el código interno de Room al compilar |
+| **DataStore Preferences** | 1.1.7 | Guardar la preferencia del filtro |
+| **Retrofit** + **converter-gson** | 3.0.0 | Peticiones HTTP y conversión de JSON |
+| **Lifecycle Runtime Compose** | 2.11.0 | Observar flujos de datos desde la interfaz respetando el ciclo de vida |
+| **Material Icons Extended** | (según BOM) | Iconos de las acciones (editar, borrar, etc.) |
+ 
+Versión mínima de Android: **API 26** (Android 8.0).
 
 ---
 
-## Estructura actual de carpetas
+## 4. Arquitectura y estructura de carpetas
+El código se separa por responsabilidades: cada carpeta se ocupa de una sola cosa.
+<img width="1654" height="271" alt="image" src="https://github.com/user-attachments/assets/d926ede1-485b-4b60-a088-663d573ddfc7" />
 
-```text
-es.centro.gestortareas/
-├── modelo/
-│   └── Tarea.kt          
-├── datos/
-│   ├── TareaDao.kt       
-│   └── AppDatabase.kt    
-├── preferencias/        
-└── red/                 
