@@ -68,3 +68,13 @@ Versión mínima de Android: **API 26** (Android 8.0).
 El código se separa por responsabilidades: cada carpeta se ocupa de una sola cosa.
 <img width="1654" height="271" alt="image" src="https://github.com/user-attachments/assets/d926ede1-485b-4b60-a088-663d573ddfc7" />
 
+```text
+es.centro.gestortareas/
+├── modelo/
+│   └── Tarea.kt            # Ficha de una tarea 
+├── datos/
+│   ├── TareaDao.kt         # leer, insertar, actualizar y eliminar
+│   └── AppDataBase.kt      # Construye y abre la base de datos "tareas_db"              
+└── MainActivity.kt        
+```
+
