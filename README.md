@@ -144,3 +144,5 @@ data class Tarea(
 | `descripcion` | `String` | `""` | Detalles opcionales |
 | `prioridad` | `String` | `"Media"` | Urgencia de la tarea |
 | `completada` | `Boolean` | `false` | Estado de la tarea |
+
+**Esquema de la tabla resultante en SQLite:**
