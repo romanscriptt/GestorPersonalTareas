@@ -135,4 +135,12 @@ data class Tarea(
     val prioridad: String = "Media",      // "Baja", "Media" o "Alta"
     val completada: Boolean = false       // false = pendiente, true = terminada
 )
+
 ```
+| Campo | Tipo | Valor inicial | Descripción |
+|---|---|---|---|
+| `id` | `Int` | `0` | Identificador único. Con `0` se indica «aún sin guardar»; la base genera el número real |
+| `titulo` | `String` | — (obligatorio) | Nombre de la tarea |
+| `descripcion` | `String` | `""` | Detalles opcionales |
+| `prioridad` | `String` | `"Media"` | Urgencia de la tarea |
+| `completada` | `Boolean` | `false` | Estado de la tarea |
