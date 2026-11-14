@@ -165,3 +165,30 @@ val terminada = tarea.copy(completada = true)
 ### 5.3 Acceso a datos: `TareaDao`
  
 `datos/TareaDao.kt` es una interfaz que declara las operaciones permitidas sobre la tabla. Room genera su implementación al compilar.
+
+```kotlin
+@Dao
+interface TareaDao {
+ 
+    // Todas las tareas, de la más reciente a la más antigua
+    // Devuelve un Flow, cada vez que la tabla cambia, se emite la lista nueva
+    @Query("SELECT * FROM tareas ORDER BY id DESC")
+    fun obtenerTodas(): Flow<List<Tarea>>
+ 
+    // Guarda una tarea. Si ya existe una con el mismo id, la reemplaza
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertar(tarea: Tarea)
+ 
+    // Guarda varias tareas en una sola operación
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarVarias(tareas: List<Tarea>)
+ 
+    // Modifica una tarea ya guardada por su id 
+    @Update
+    suspend fun actualizar(tarea: Tarea)
+ 
+    // Elimina definitivamente la tarea indicada
+    @Delete
+    suspend fun eliminar(tarea: Tarea)
+}
+```
