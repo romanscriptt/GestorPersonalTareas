@@ -124,3 +124,15 @@ dependencies {
 ## 5.2 Modelo de datos: `Tarea`
  
 `modelo/Tarea.kt` define cómo es una tarea y, al estar anotada con `@Entity`, Room crea a partir de ella la tabla `tareas`.
+
+```kotlin
+@Entity(tableName = "tareas")
+data class Tarea(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,                      // lo asigna la base de datos al insertar
+    val titulo: String,                   // nombre principal de la tarea
+    val descripcion: String = "",         // texto opcional con más detalles
+    val prioridad: String = "Media",      // "Baja", "Media" o "Alta"
+    val completada: Boolean = false       // false = pendiente, true = terminada
+)
+```
