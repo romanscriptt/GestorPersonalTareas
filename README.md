@@ -120,3 +120,7 @@ dependencies {
 ```
  
 ---
+
+## 5.2 Modelo de datos: `Tarea`
+ 
+`modelo/Tarea.kt` define cómo es una tarea y, al estar anotada con `@Entity`, Room crea a partir de ella la tabla `tareas`.
