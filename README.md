@@ -146,3 +146,11 @@ data class Tarea(
 | `completada` | `Boolean` | `false` | Estado de la tarea |
 
 **Esquema de la tabla resultante en SQLite:**
+
+| Columna | Tipo SQLite | Restricciones |
+|---|---|---|
+| `id` | `INTEGER` | Clave primaria, autoincremental |
+| `titulo` | `TEXT` | `NOT NULL` |
+| `descripcion` | `TEXT` | `NOT NULL` |
+| `prioridad` | `TEXT` | `NOT NULL` |
+| `completada` | `INTEGER` | `NOT NULL` (0 = pendiente, 1 = completada) |
