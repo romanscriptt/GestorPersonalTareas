@@ -205,4 +205,7 @@ interface TareaDao {
 - Las **escrituras son `suspend`**: se ejecutan desde corrutinas sin bloquear el hilo principal, por lo que la pantalla no se queda congelada.
 - La **lectura devuelve un `Flow`**: la interfaz recibe automáticamente la lista actualizada tras cada inserción, modificación o borrado, sin mantener una segunda lista en memoria.
 - La consulta incluye `ORDER BY`, ya que sin él no se debe asumir un orden concreto.
+  
 ---
+
+### 5.4 Base de datos: `AppDataBase`
