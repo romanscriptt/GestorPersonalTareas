@@ -154,3 +154,9 @@ data class Tarea(
 | `descripcion` | `TEXT` | `NOT NULL` |
 | `prioridad` | `TEXT` | `NOT NULL` |
 | `completada` | `INTEGER` | `NOT NULL` (0 = pendiente, 1 = completada) |
+
+Al ser una `data class`, para modificar una tarea se crea una **copia** que conserva el `id`, de modo que la base actualiza la misma fila:
+ 
+```kotlin
+val terminada = tarea.copy(completada = true)
+```
