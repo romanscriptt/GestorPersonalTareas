@@ -192,3 +192,10 @@ interface TareaDao {
     suspend fun eliminar(tarea: Tarea)
 }
 ```
+ Operación | Anotación | ¿`suspend`? | Descripción |
+|---|---|---|---|
+| `obtenerTodas()` | `@Query` | No (devuelve `Flow`) | Lectura observable de todas las tareas |
+| `insertar(tarea)` | `@Insert` | Sí | Añade una tarea |
+| `insertarVarias(tareas)` | `@Insert` | Sí | Añade una lista de tareas de golpe |
+| `actualizar(tarea)` | `@Update` | Sí | Guarda los cambios de una tarea existente |
+| `eliminar(tarea)` | `@Delete` | Sí | Borra una tarea |
