@@ -160,3 +160,8 @@ Al ser una `data class`, para modificar una tarea se crea una **copia** que cons
 ```kotlin
 val terminada = tarea.copy(completada = true)
 ```
+---
+ 
+### 5.3 Acceso a datos: `TareaDao`
+ 
+`datos/TareaDao.kt` es una interfaz que declara las operaciones permitidas sobre la tabla. Room genera su implementación al compilar.
