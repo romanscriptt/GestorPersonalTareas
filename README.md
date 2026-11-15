@@ -23,6 +23,11 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.8 Coordinador: `TareasViewModel`](#58-coordinador-tareasviewmodel)
    - [5.9 Interfaz: `MainActivity`](#59-interfaz-mainactivity)
 6. [Arquitectura de la aplicación](#6-arquitectura-de-la-aplicación)
+7. [Estado de las funcionalidades](#7-estado-de-las-funcionalidades)
+8. [Capturas de pantalla](#8-capturas-de-pantalla)
+9. [Cómo ejecutar el proyecto](#9-cómo-ejecutar-el-proyecto)
+10. [Pruebas](#10-pruebas)
+11. [Incidencias conocidas y trabajo pendiente](#11-incidencias-conocidas-y-trabajo-pendiente)
 
 ---
 
@@ -385,5 +390,95 @@ es.centro.gestortareas/
 ├── TareasViewModel.kt            # Coordina datos, preferencias y red para la pantalla
 └── MainActivity.kt               # Única actividad; pantalla principal y componentes
 ```
+---
+
+## 7. Estado de las funcionalidades
  
+| Funcionalidad | Estado | Observaciones |
+|---|---|---|
+| Listado de tareas con `LazyColumn` y mensaje de lista vacía | Hecho | Muestra título, descripción, prioridad y estado |
+| Crear tarea (título, descripción, prioridad) | Parcial | Falta validar mínimo 3 caracteres y mostrar el error junto al campo |
+| Marcar como completada | Hecho | Se guarda en la base de datos |
+| Editar tarea | Pendiente | |
+| Eliminar tarea | Parcial | Elimina, pero sin diálogo de confirmación |
+| Almacenamiento permanente (Room) | Hecho | Base de datos `tareas_db` |
+| Filtro "Mostrar solo pendientes" (DataStore) | Hecho | Se conserva entre ejecuciones |
+| Consulta a servicio web (Retrofit) | Parcial | Falta separar las tareas de ejemplo de las personales y el botón de reintento |
+| Compartir una tarea (`ACTION_SEND`) | Pendiente | |
+| Pruebas en dos emuladores y APK | Pendiente | |
+ 
+---
+
+## 8. Capturas de pantalla
+ 
+Las imágenes están en la carpeta `docs/capturas`.
+ 
+| Lista con tareas | Nueva tarea |
+|---|---|
+| ![Lista con tareas](docs/capturas/02-lista-con-tareas.png) | ![Formulario de nueva tarea](docs/capturas/03-nueva-tarea.png) |
+ 
+| Filtro de pendientes | Tareas de ejemplo (API) |
+|---|---|
+| ![Filtro de pendientes](docs/capturas/04-filtro-pendientes.png) | ![Consulta a la API](docs/capturas/05-tareas-ejemplo-api.png) |
+ 
+Demostraciones animadas:
+ 
+| Crear una tarea | Persistencia al cerrar y reabrir |
+|---|---|
+| ![Crear una tarea](docs/capturas/crear-tarea.gif) | ![Persistencia](docs/capturas/persistencia.gif) |
+ 
+---
+ 
+## 9. Cómo ejecutar el proyecto
+ 
+**Requisitos:** Android Studio actualizado y un emulador o dispositivo con **Android 8.0 (API 26) o superior**.
+ 
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/romanscriptt/GestorPersonalTareas.git
+```
+2. Abrir la carpeta con **Android Studio** y esperar a que termine la sincronización de Gradle.
+3. Crear o iniciar un dispositivo virtual desde *Device Manager*.
+4. Pulsar **Run** con la variante `debug`.
+El APK de depuración estará en `entrega/app-debug.apk`.
+ 
+### Emuladores utilizados
+ 
+| | Emulador 1 | Emulador 2 |
+|---|---|---|
+| Nombre | _completar_ | _completar_ |
+| Perfil de hardware | _completar (pantalla compacta)_ | _completar (pantalla grande)_ |
+| API / imagen del sistema | _completar_ | _completar_ |
+ 
+---
+ 
+## 10. Pruebas
+ 
+| Nº | Prueba | Resultado esperado | Emulador 1 | Emulador 2 |
+|---|---|---|---|---|
+| 1 | Crear una tarea válida | Se guarda y aparece en la lista | _pendiente_ | _pendiente_ |
+| 2 | Intentar guardar un título vacío | Se muestra un error y no se crea | _pendiente_ | _pendiente_ |
+| 3 | Editar una tarea | Los cambios se muestran correctamente | _pendiente_ | _pendiente_ |
+| 4 | Marcar una tarea como completada | Cambia su estado y queda guardado | _pendiente_ | _pendiente_ |
+| 5 | Cancelar una eliminación | La tarea no desaparece | _pendiente_ | _pendiente_ |
+| 6 | Eliminar una tarea confirmando | Desaparece de la base de datos | _pendiente_ | _pendiente_ |
+| 7 | Cerrar y volver a abrir la aplicación | Se recuperan las tareas guardadas | _pendiente_ | _pendiente_ |
+| 8 | Activar el filtro y reiniciar | Se conserva la preferencia | _pendiente_ | _pendiente_ |
+| 9 | Consultar la API con Internet | Se muestran las tareas recibidas | _pendiente_ | _pendiente_ |
+| 10 | Consultar la API sin conexión | Se muestra un error y se permite reintentar | _pendiente_ | _pendiente_ |
+| 11 | Compartir una tarea | Se abre el selector de aplicaciones | _pendiente_ | _pendiente_ |
+| 12 | Cambiar la orientación del dispositivo | Sigue funcionando y conserva los datos | _pendiente_ | _pendiente_ |
+ 
+---
+ 
+## 11. Incidencias conocidas y trabajo pendiente
+ 
+- **Validación del título:** actualmente solo se exige que no esté en blanco; falta el mínimo de 3 caracteres y el mensaje de error junto al campo.
+- **Editar tarea:** sin implementar.
+- **Eliminar:** falta el diálogo de confirmación.
+- **Tareas de ejemplo:** deben mostrarse como una lista separada de las tareas personales (sin guardarlas en Room), usando `GET /todos?userId=1`, con identificador, título y estado, y con botón de reintento.
+- **Compartir:** sin implementar (`ACTION_SEND`).
+- **Selector de prioridad:** se hace con chips; el enunciado pide un menú desplegable.
+- **Recursos:** la interfaz usa textos escritos directamente en el código; falta usar `strings.xml` y mostrar el icono `ic_tareas`.
+- **Organización:** `TareasViewModel.kt` y los componentes de pantalla deben moverse a sus propias carpetas (`viewmodel/` y `ui/`).
 ---
