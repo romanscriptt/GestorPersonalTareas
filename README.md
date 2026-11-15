@@ -16,6 +16,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.1 Configuración del proyecto](#51-configuración-del-proyecto)
    - [5.2 Modelo de datos: `Tarea`](#52-modelo-de-datos-tarea)
    - [5.3 Acceso a datos: `TareaDao`](#53-acceso-a-datos-tareadao)
+   - [5.4 Base de datos: `AppDataBase`](#54-base-de-datos-appdatabase)
 
 ---
 
@@ -209,3 +210,12 @@ interface TareaDao {
 ---
 
 ### 5.4 Base de datos: `AppDataBase`
+
+ 
+`datos/AppDataBase.kt` reúne la entidad `Tarea` con el DAO y abre la base de datos real en el almacenamiento interno del dispositivo con el nombre **`tareas_db`**.
+ 
+- Expone `TareaDao` para que el resto de la aplicación acceda a los datos.
+- Implementa el patrón **Singleton** mediante `@Volatile` y `synchronized`: solo existe **una instancia** de la base en toda la aplicación, lo que evita errores o inconsistencias cuando varias partes intentan leer o escribir a la vez.
+- Se construye con el **contexto de aplicación** para no retener ninguna actividad.
+- Nunca se usan consultas en el hilo principal (`allowMainThreadQueries()` no se utiliza).
+---
