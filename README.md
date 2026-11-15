@@ -21,6 +21,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.6 Preferencias: `PreferenciasTareas`](#56-preferencias-preferenciastareas)
    - [5.7 Comunicaciones: Retrofit](#57-comunicaciones-retrofit)
    - [5.8 Coordinador: `TareasViewModel`](#58-coordinador-tareasviewmodel)
+   - [5.9 Interfaz: `MainActivity`](#59-interfaz-mainactivity)
 
 
 
@@ -329,4 +330,24 @@ El filtro se aplica **en memoria** sobre la lista recibida: no se modifica ni se
  
 Todas las operaciones se lanzan con `viewModelScope.launch`, es decir, en segundo plano y ligadas a la vida del `ViewModel`.
  
+---
+
+### 5.9 Interfaz: `MainActivity`
+ 
+La actividad solo conecta Android con Compose; la pantalla se describe con funciones `@Composable`.
+ 
+| Componente | Descripción |
+|---|---|
+| `PantallaPrincipalTareas` | `Scaffold` con barra superior, botón flotante, interruptor del filtro, indicador de carga y lista |
+| `TarjetaTarea` | Tarjeta de una tarea: casilla de completada, título (tachado si está terminada), descripción, prioridad con color y botón de eliminar |
+| `DialogoNuevaTarea` | `AlertDialog` con campos de título y descripción y selector de prioridad |
+ 
+Detalles de la interfaz:
+ 
+- La lista usa `LazyColumn` con `key = { it.id }` para dar identidad estable a cada fila.
+- Si no hay tareas se muestra un mensaje informativo en lugar de una lista vacía.
+- Un `Snackbar` muestra los avisos de la descarga (éxito o error).
+- El botón de descarga se deshabilita mientras hay una petición en curso, evitando peticiones simultáneas.
+- El estado de la pantalla vive en el `ViewModel`, por lo que sobrevive a los giros.
+
 ---
