@@ -20,6 +20,8 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.5 Recursos](#55-recursos)
    - [5.6 Preferencias: `PreferenciasTareas`](#56-preferencias-preferenciastareas)
    - [5.7 Comunicaciones: Retrofit](#57-comunicaciones-retrofit)
+   - [5.8 Coordinador: `TareasViewModel`](#58-coordinador-tareasviewmodel)
+
 
 
 ---
@@ -297,5 +299,34 @@ data class TareaRemota(
 ```
  
 `TareaRemota` incluye la función `aTareaLocal()`, que convierte una tarea recibida de Internet en una `Tarea`. La función `obtenerTareasEjemplo()` es `suspend`, por lo que la petición se hace sin bloquear la interfaz.
+ 
+---
+
+### 5.8 Coordinador: `TareasViewModel`
+ 
+`TareasViewModel` conecta la base de datos, las preferencias y la red con la pantalla. Conserva el estado ante giros del dispositivo y expone los datos como `StateFlow`.
+ 
+```kotlin
+// Combina, en tiempo real, la lista de Room con el filtro guardado en DataStore
+val tareasVisible: StateFlow<List<Tarea>> = combine(
+    dao.obtenerTodas(),
+    soloPendientes
+) { listaTareas, filtrarPendientes ->
+    if (filtrarPendientes) listaTareas.filter { !it.completada } else listaTareas
+}.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+```
+ 
+El filtro se aplica **en memoria** sobre la lista recibida: no se modifica ni se borra ninguna fila para ocultarla.
+ 
+| Función | Qué hace |
+|---|---|
+| `agregarTarea(titulo, descripcion, prioridad)` | Crea y guarda una tarea (ignora títulos en blanco) |
+| `alternarCompletada(tarea)` | Cambia el estado con `copy(completada = !tarea.completada)` y lo guarda |
+| `eliminarTarea(tarea)` | Borra la tarea de la base de datos |
+| `cambiarFiltroPendientes(activar)` | Guarda la preferencia en DataStore |
+| `importarTareasDeInternet()` | Descarga las tareas de ejemplo con indicador de carga y aviso de error |
+| `limpiarAviso()` | Retira el mensaje mostrado al usuario |
+ 
+Todas las operaciones se lanzan con `viewModelScope.launch`, es decir, en segundo plano y ligadas a la vida del `ViewModel`.
  
 ---
