@@ -19,6 +19,8 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.4 Base de datos: `AppDataBase`](#54-base-de-datos-appdatabase)
    - [5.5 Recursos](#55-recursos)
    - [5.6 Preferencias: `PreferenciasTareas`](#56-preferencias-preferenciastareas)
+   - [5.7 Comunicaciones: Retrofit](#57-comunicaciones-retrofit)
+
 
 ---
 
@@ -260,5 +262,40 @@ class PreferenciasTareas(private val contexto: Context) {
 ```
  
 La declaración `by preferencesDataStore(...)` se hace **una sola vez, fuera de la clase**, para que solo exista un archivo de preferencias abierto. La lectura es un `Flow` y la escritura es una función `suspend`.
+ 
+---
+ 
+### 5.7 Comunicaciones: Retrofit
+ 
+`red/ClienteRetrofit.kt` define la petición y construye el cliente; `red/TareaRemota.kt` recoge el JSON recibido.
+ 
+```kotlin
+interface TareasApi {
+    @GET("todos?_limit=5")
+    suspend fun obtenerTareasEjemplo(): List<TareaRemota>
+}
+ 
+object ClienteRetrofit {
+    private const val URL_BASE = "https://jsonplaceholder.typicode.com/"
+ 
+    val api: TareasApi by lazy {            // se crea una sola vez, al usarse por primera vez
+        Retrofit.Builder()
+            .baseUrl(URL_BASE)               // la URL base termina en "/"
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(TareasApi::class.java)
+    }
+}
+```
+ 
+```kotlin
+data class TareaRemota(
+    val id: Int,
+    @SerializedName("title") val titulo: String,       // el JSON usa "title"
+    @SerializedName("completed") val completada: Boolean
+)
+```
+ 
+`TareaRemota` incluye la función `aTareaLocal()`, que convierte una tarea recibida de Internet en una `Tarea`. La función `obtenerTareasEjemplo()` es `suspend`, por lo que la petición se hace sin bloquear la interfaz.
  
 ---
