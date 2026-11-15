@@ -18,6 +18,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.3 Acceso a datos: `TareaDao`](#53-acceso-a-datos-tareadao)
    - [5.4 Base de datos: `AppDataBase`](#54-base-de-datos-appdatabase)
    - [5.5 Recursos](#55-recursos)
+   - [5.6 Preferencias: `PreferenciasTareas`](#56-preferencias-preferenciastareas)
 
 ---
 
@@ -228,5 +229,36 @@ interface TareaDao {
 | Icono de la aplicación | `res/drawable/ic_tareas.xml` | Icono **vectorial** propio; se ve nítido en cualquier densidad de pantalla |
  
 Los textos se leen desde Compose con `stringResource(R.string.nombre)`.
+ 
+---
+
+### 5.6 Preferencias: `PreferenciasTareas`
+ 
+`preferencias/PreferenciasTareas.kt` guarda con **DataStore** si el usuario quiere ver solo las tareas pendientes. Los datos de las tareas siguen en Room; DataStore se usa únicamente para esta preferencia de visualización.
+ 
+```kotlin
+private val Context.dataStore by preferencesDataStore(name = "ajustes_tareas")
+ 
+class PreferenciasTareas(private val contexto: Context) {
+ 
+    companion object {
+        private val CLAVE_SOLO_PENDIENTES = booleanPreferencesKey("solo_pendientes")
+    }
+ 
+    // Lectura: si aún no hay nada guardado, vale false (mostrar todas)
+    val soloPendientes: Flow<Boolean> = contexto.dataStore.data.map { preferencias ->
+        preferencias[CLAVE_SOLO_PENDIENTES] ?: false
+    }
+ 
+    // Escritura: función suspendible
+    suspend fun guardarSoloPendientes(activar: Boolean) {
+        contexto.dataStore.edit { preferencias ->
+            preferencias[CLAVE_SOLO_PENDIENTES] = activar
+        }
+    }
+}
+```
+ 
+La declaración `by preferencesDataStore(...)` se hace **una sola vez, fuera de la clase**, para que solo exista un archivo de preferencias abierto. La lectura es un `Flow` y la escritura es una función `suspend`.
  
 ---
