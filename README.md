@@ -17,6 +17,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.2 Modelo de datos: `Tarea`](#52-modelo-de-datos-tarea)
    - [5.3 Acceso a datos: `TareaDao`](#53-acceso-a-datos-tareadao)
    - [5.4 Base de datos: `AppDataBase`](#54-base-de-datos-appdatabase)
+   - [5.5 Recursos](#55-recursos)
 
 ---
 
@@ -218,4 +219,14 @@ interface TareaDao {
 - Implementa el patrón **Singleton** mediante `@Volatile` y `synchronized`: solo existe **una instancia** de la base en toda la aplicación, lo que evita errores o inconsistencias cuando varias partes intentan leer o escribir a la vez.
 - Se construye con el **contexto de aplicación** para no retener ninguna actividad.
 - Nunca se usan consultas en el hilo principal (`allowMainThreadQueries()` no se utiliza).
+---
+### 5.5 Recursos
+ 
+| Recurso | Ubicación | Descripción |
+|---|---|---|
+| Textos de la interfaz | `res/values/strings.xml` | Nombre de la app, títulos, botones y mensaje de lista vacía, centralizados en un único lugar |
+| Icono de la aplicación | `res/drawable/ic_tareas.xml` | Icono **vectorial** propio; se ve nítido en cualquier densidad de pantalla |
+ 
+Los textos se leen desde Compose con `stringResource(R.string.nombre)`.
+ 
 ---
