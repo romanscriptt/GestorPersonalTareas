@@ -22,8 +22,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
    - [5.7 Comunicaciones: Retrofit](#57-comunicaciones-retrofit)
    - [5.8 Coordinador: `TareasViewModel`](#58-coordinador-tareasviewmodel)
    - [5.9 Interfaz: `MainActivity`](#59-interfaz-mainactivity)
-
-
+6. [Arquitectura de la aplicación](#6-arquitectura-de-la-aplicación)
 
 ---
 
@@ -350,4 +349,41 @@ Detalles de la interfaz:
 - El botón de descarga se deshabilita mientras hay una petición en curso, evitando peticiones simultáneas.
 - El estado de la pantalla vive en el `ViewModel`, por lo que sobrevive a los giros.
 
+---
+
+## 6. Arquitectura de la aplicación
+ 
+La interfaz nunca habla directamente con la base de datos ni con Internet: pasa por el `ViewModel`.
+ 
+```mermaid
+flowchart LR
+    UI["Interfaz Compose<br/>MainActivity"] -->|"acciones del usuario"| VM["TareasViewModel"]
+    VM -->|"StateFlow"| UI
+    VM --> DAO["TareaDao"]
+    DAO --> BD[("AppDataBase<br/>Room")]
+    VM --> PREF["PreferenciasTareas"]
+    PREF --> DS[("DataStore")]
+    VM --> NET["ClienteRetrofit"]
+    NET --> API(("JSONPlaceholder"))
+```
+ 
+Estructura de carpetas actual:
+ 
+```text
+es.centro.gestortareas/
+├── modelo/
+│   └── Tarea.kt                  # Entidad: ficha de una tarea (tabla "tareas")
+├── datos/
+│   ├── TareaDao.kt               # Leer, insertar, actualizar y eliminar
+│   └── AppDataBase.kt            # Abre la base de datos "tareas_db" (instancia única)
+├── preferencias/
+│   └── PreferenciasTareas.kt     # Filtro "solo pendientes" con DataStore
+├── red/
+│   ├── ClienteRetrofit.kt        # Interfaz de la API y cliente Retrofit
+│   └── TareaRemota.kt            # Modelo de los datos que llegan de Internet
+├── ui/theme/                     # Colores, tipografía y tema Material 3
+├── TareasViewModel.kt            # Coordina datos, preferencias y red para la pantalla
+└── MainActivity.kt               # Única actividad; pantalla principal y componentes
+```
+ 
 ---
