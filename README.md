@@ -28,6 +28,7 @@ Proyecto de la práctica del módulo **Programación Multimedia y Dispositivos M
 9. [Cómo ejecutar el proyecto](#9-cómo-ejecutar-el-proyecto)
 10. [Pruebas](#10-pruebas)
 11. [Incidencias conocidas y trabajo pendiente](#11-incidencias-conocidas-y-trabajo-pendiente)
+12. [Uso de la IA](#12-uso-de-la-ia)
 
 ---
 
@@ -481,4 +482,17 @@ El APK de depuración estará en `entrega/app-debug.apk`.
 - **Selector de prioridad:** se hace con chips; el enunciado pide un menú desplegable.
 - **Recursos:** la interfaz usa textos escritos directamente en el código; falta usar `strings.xml` y mostrar el icono `ic_tareas`.
 - **Organización:** `TareasViewModel.kt` y los componentes de pantalla deben moverse a sus propias carpetas (`viewmodel/` y `ui/`).
+
 ---
+ 
+## 12. Uso de la IA
+ 
+Durante el desarrollo se ha utilizado inteligencia artificial (Gemini y Claude) como apoyo, tanto para consultar y entender conceptos, métodos y errores como para generar fragmentos de código que después se han revisado, probado y estudiado para poder explicarlos.
+ 
+- Enlace al chat de Gemini: _pendiente de añadir_
+- Enlace al chat de Claude: _pendiente de añadir_
+---
+ 
+## Autor
+ 
+Proyecto realizado por **romanscriptt** para la asignatura PMDM.
