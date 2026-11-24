@@ -489,7 +489,7 @@ El APK de depuración estará en `entrega/app-debug.apk`.
  
 Durante el desarrollo se ha utilizado inteligencia artificial (Gemini y ChatGPT) como apoyo, tanto para consultar y entender conceptos, métodos y errores como para generar fragmentos de código que después se han revisado, probado y estudiado para poder explicarlos.
  
-- Enlace al chat de Gemini: _pendiente de añadir_
+- Enlace al chat de Gemini: https://gemini.google.com/share/d/1SXsRO_98D0Tsyi5yXJrMKjYOIt-AzYjQ?usp=sharing 
 - Enlace al chat de ChatGPT: https://chatgpt.com/share/6b05eaeb-a16c-83ed-8f4c-0116d016a227
 ---
  
